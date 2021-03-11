@@ -25,7 +25,7 @@ class IdeasController < ApplicationController
   private
 
   def idea_params
-    params.require(:idea_category).permit(:name, :body)
+    params.permit(:name, :body)
   end
 
   def select_ideas
