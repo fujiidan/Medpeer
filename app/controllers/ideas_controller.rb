@@ -1,6 +1,6 @@
 class IdeasController < ApplicationController
 
-  def index
+  def search
     if params[:category_name]
       if Category.find_by(name: params[:category_name])
         @category_ideas = Category.joins(:ideas).where(name: params[:category_name]).select('ideas.id, name AS category, body')
