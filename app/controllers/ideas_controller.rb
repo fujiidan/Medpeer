@@ -4,22 +4,21 @@ class IdeasController < ApplicationController
     category_name = params[:category_name]
     if category_name && Category.find_by(name: category_name)
       category_ideas = select_ideas.where(name: category_name)
-      render json: { status: 200, message: "Ideas associated with categories", data: category_ideas}
+      render json: { status: 200, message: "Idea Search OK", data: category_ideas}
     elsif category_name && !Category.find_by(name: category_name)
-      render json: { status: 404, message: "Category not found" }
+      render json: { status: 404, message: "Category Not Found" }
     else
       category_ideas = select_ideas
-      render json: { status: 200, message: "All ideas", data: category_ideas }
-    end  
+      render json: { status: 200, message: "OK", data: category_ideas }
+    end
   end
   
   def create
     idea_category = IdeaCategory.new(idea_params)
-    if idea_category.valid?
-      idea_category.save
-      render json: { status: 201, message: "Created idea" }
+    if idea_category.save
+      render json: { status: 201, message: "Created Idea" }
     else
-      render json: { status: 422, message: "Failed to create idea" }
+      render json: { status: 422, message: "Unprocessable Entity" }
     end  
   end
 
