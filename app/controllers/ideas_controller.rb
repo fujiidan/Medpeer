@@ -1,13 +1,11 @@
 class IdeasController < ApplicationController
 
   def search
-    if params[:category_name]
-      if Category.find_by(name: params[:category_name])
-        @category_ideas = Category.joins(:ideas).where(name: params[:category_name]).select('ideas.id, name AS category, body')
-        render json: { data: @category_ideas}
-      else
-        render json: { status: 404, message: "Category not found" }
-      end  
+    if params[:category_name] && Category.find_by(name: params[:category_name])
+      @category_ideas = Category.joins(:ideas).where(name: params[:category_name]).select('ideas.id, name AS category, body')
+      render json: { data: @category_ideas}
+    elsif params[:category_name] && !Category.find_by(name: params[:category_name])
+      render json: { status: 404, message: "Category not found" }
     else
       @category_ideas = Category.joins(:ideas).select('ideas.id, name AS category, body')
       render json: { data: @category_ideas}
