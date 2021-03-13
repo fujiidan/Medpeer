@@ -1,5 +1,5 @@
 class Category < ApplicationRecord
-  validates :name, uniqueness: true
+  validates :name, uniqueness: { case_sensitive: false }
   has_many :ideas
 
   def self.select_ideas
