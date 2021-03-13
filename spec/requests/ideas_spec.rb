@@ -45,6 +45,7 @@ RSpec.describe "Ideas", type: :request do
         data = JSON.parse(response.body)['data']
         expect(response.status).to eq 200
         expect(data.length).to eq 2
+        expect(data[0]['id']).to eq @ideas1[0].id
         expect(data[0]['body']).to include @ideas1[0].body
         expect(data[0]['category']).to include @categories[0].name
       end
