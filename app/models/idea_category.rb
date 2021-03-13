@@ -1,5 +1,4 @@
 class IdeaCategory
-
   include ActiveModel::Model
   attr_accessor :body, :name
 
@@ -13,14 +12,15 @@ class IdeaCategory
   def to_model
     idea
   end
-  
+
   def save
     return if invalid?
+
     ActiveRecord::Base.transaction do
       category = Category.find_or_create_by!(name: name)
       Idea.create!(body: body, category_id: category.id)
     end
-    rescue ActiveRecord::RecordInvalid
-      false
+  rescue ActiveRecord::RecordInvalid
+    false
   end
-end  
+end
