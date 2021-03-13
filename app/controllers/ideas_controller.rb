@@ -18,7 +18,7 @@ class IdeasController < ApplicationController
     if idea_category.save
       render status: 201, json: { status: 201, message: "Created Idea" }
     else
-      render status: 422, json: { status: 422, message: "Unprocessable Entity" }
+      render status: 422, json: { status: 422, message: "Unprocessable Entity", errors: idea_category.errors.full_messages  }
     end  
   end
 

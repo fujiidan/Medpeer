@@ -25,7 +25,10 @@ RSpec.describe "Ideas", type: :request do
 
       it 'idea作成に失敗するとステータスコード422を返すこと' do
         expect{ post ideas_path, params: { idea: { name: "", body: "" }}}.to change{ Category.count }.by(0).and change{ Idea.count }.by(0)
+        errors = JSON.parse(response.body)['errors']
         expect(response.status).to eq 422
+        expect(errors).to include("Body can't be blank")
+        expect(errors).to include("Name can't be blank")
       end  
     end
   end
