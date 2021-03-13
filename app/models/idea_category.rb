@@ -8,6 +8,12 @@ class IdeaCategory
     validates :name, length: { maximum: 255 }
   end
 
+  delegate :persisted?, to: :idea
+
+  def to_model
+    idea
+  end
+  
   def save
     return if invalid?
     ActiveRecord::Base.transaction do

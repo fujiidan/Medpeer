@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Ideas", type: :request do
   before do
     @idea_category = build(:idea_category)
-    @post_params = { idea_category: { name: @idea_category.name, body: @idea_category.body }}
+    @post_params = { idea: { name: @idea_category.name, body: @idea_category.body }}
   end  
   describe 'idea投稿APIテスト' do
 
@@ -24,7 +24,7 @@ RSpec.describe "Ideas", type: :request do
     context 'idea作成に失敗したとき' do
 
       it 'idea作成に失敗するとステータスコード422を返すこと' do
-        expect{ post ideas_path, params: { idea_category: { name: "", body: "" }}}.to change{ Category.count }.by(0).and change{ Idea.count }.by(0)
+        expect{ post ideas_path, params: { idea: { name: "", body: "" }}}.to change{ Category.count }.by(0).and change{ Idea.count }.by(0)
         expect(response.status).to eq 422
       end  
     end
