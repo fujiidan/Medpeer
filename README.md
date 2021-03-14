@@ -60,7 +60,7 @@
 
 ## 課題点と疑問点
 
-- ストロングパラメーター設定においてrequireすべきなのか? 外部apiとしては使用しづらくなる為不要? 実装自体はideaモデルをrequireしております。
+- ストロングパラメーター設定においてrequireすべきなのか? 外部apiとしては使用しづらくなる為不要? 実装自体はideaモデルをrequireしております。
 - Rails apiモードの際の仕様をもっと理解すべきだと思いました。（ローカル変数やインスタンス変数の取り扱い、レスポンスのデータ内容など)
 
 
@@ -79,7 +79,7 @@
 
 ### Association
 
-- has_many :ideas
+- has_many :ideas, dependent: :destroy
 
 
 ## ideas テーブル
